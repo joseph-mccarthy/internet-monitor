@@ -77,4 +77,4 @@ def main(minutes):
 
 
 if __name__ == '__main__':
-    main(2)
+    main(2) # TODO make this a command line argument else default to 30 minutes
