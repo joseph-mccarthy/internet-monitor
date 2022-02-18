@@ -1,9 +1,9 @@
-from datetime import datetime
-from distutils.log import debug
+from datetime import datetime, timedelta, date
 import subprocess
 import json
 from time import sleep 
 from database import Base, db_session, engine
+from sqlalchemy import func
 from models.result import Result
 from dateutil.parser import parse
 from flask import Flask
@@ -26,13 +26,26 @@ def init_api():
      timestamp = fields.DateTime()
 
 
+    object_schema = ObjectSchema()
 
 
     @app.route("/results")
     def results():
         result = db_session.query(Result).all()
-        object_schema = ObjectSchema()
         return object_schema.dumps(result, many=True)
+
+    @app.route("/latest")
+    def latest():
+        result = db_session.query(Result).order_by(Result.id.desc()).first()
+        return object_schema.dumps(result, many=False)
+
+    @app.route("/today")
+    def last_day():
+        delta = datetime.now() - timedelta(days = 1)
+        print(delta)
+        result =  db_session.query(Result).filter(func.DATE(Result.timestamp) >= delta).all()
+        return object_schema.dumps(result, many=True)
+
 
     app.run(debug=True);
 
