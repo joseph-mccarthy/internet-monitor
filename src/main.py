@@ -10,6 +10,7 @@ from flask import Flask
 import threading
 from marshmallow import Schema, fields
 from flask_cors import CORS, cross_origin
+from speed import speed_test
 
 def init_db():
 
@@ -52,25 +53,10 @@ def init_api():
         return object_schema.dumps(result, many=True)
 
 
-    app.run(debug=True);
+    app.run(debug=False);
 
 
-def speed_test(minutes):
-    while True:
-        print(datetime.now().isoformat() + "\t Testing Internet Speed")
-        response = subprocess.Popen('speedtest-cli --json', shell=True, stdout=subprocess.PIPE).stdout.read()
-        test_data = json.loads(response)
 
-        result:Result = Result()
-        result.download = test_data['download']
-        result.upload = test_data['upload']
-        result.ping = test_data['ping']
-        result.timestamp = parse(test_data['timestamp'])
-
-        db_session.add(result)
-        db_session.commit()
-    
-        sleep(minutes * 60)
 def main(minutes):
 
     init_db()
@@ -82,4 +68,4 @@ def main(minutes):
 
 
 if __name__ == '__main__':
-    main(2) # TODO make this a command line argument else default to 30 minutes
+    main(1) # TODO make this a command line argument else default to 30 minutes
