@@ -9,6 +9,7 @@ from dateutil.parser import parse
 from flask import Flask
 import threading
 from marshmallow import Schema, fields
+from flask_cors import CORS, cross_origin
 
 def init_db():
 
@@ -17,6 +18,8 @@ def init_db():
 
 def init_api():
     app = Flask(__name__)
+    cors = CORS(app)
+    app.config['CORS_HEADERS'] = 'Content-Type'
     
     class ObjectSchema(Schema):
      id = fields.Int()
@@ -30,19 +33,21 @@ def init_api():
 
 
     @app.route("/results")
+    @cross_origin()
     def results():
         result = db_session.query(Result).all()
         return object_schema.dumps(result, many=True)
 
     @app.route("/latest")
+    @cross_origin()
     def latest():
         result = db_session.query(Result).order_by(Result.id.desc()).first()
         return object_schema.dumps(result, many=False)
 
     @app.route("/today")
+    @cross_origin()
     def last_day():
         delta = datetime.now() - timedelta(days = 1)
-        print(delta)
         result =  db_session.query(Result).filter(func.DATE(Result.timestamp) >= delta).all()
         return object_schema.dumps(result, many=True)
 
