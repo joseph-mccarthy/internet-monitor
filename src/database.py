@@ -3,7 +3,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 
-engine = create_engine('sqlite:///internet.sqlite')
+engine = create_engine('sqlite:////tmp/internet-monitor.db')
 connection = engine.connect()
 Base = declarative_base()
 
