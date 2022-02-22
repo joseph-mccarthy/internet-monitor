@@ -6,10 +6,12 @@ from flask import Flask
 from flask_cors import CORS, cross_origin
 from models.resultSchema import ResultSchema
 
+
 def init_db():
 
     Base.metadata.create_all(bind=engine)
     print("Initialized the db")
+
 
 def init_api():
     app = Flask(__name__)
@@ -37,9 +39,7 @@ def init_api():
     app.run(debug=True,host="0.0.0.0");
 
 
-
 def main():
-
     init_db()
     init_api()
 
