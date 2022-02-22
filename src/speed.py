@@ -1,7 +1,6 @@
 from datetime import datetime
 import subprocess
 from models.result import Result
-from dateutil.parser import parse
 import json
 from database import Base, db_session,engine
 
@@ -26,7 +25,7 @@ def populate_model(json_data):
     result.download = json_data['download']
     result.upload = json_data['upload']
     result.ping = json_data['ping']
-    result.timestamp = parse(json_data['timestamp'])
+    result.timestamp = datetime.now()
     return result
 
 def speed_test_cli():
