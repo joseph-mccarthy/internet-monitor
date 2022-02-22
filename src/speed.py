@@ -4,8 +4,6 @@ from models.result import Result
 from dateutil.parser import parse
 import json
 from database import Base, db_session,engine
-from time import sleep
-import pprint
 
 def init_db():
 
