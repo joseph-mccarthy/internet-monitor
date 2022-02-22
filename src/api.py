@@ -3,8 +3,8 @@ from database import Base, db_session, engine
 from sqlalchemy import func
 from models.result import Result
 from flask import Flask
-from marshmallow import Schema, fields
 from flask_cors import CORS, cross_origin
+from models.resultSchema import ResultSchema
 
 def init_db():
 
@@ -15,15 +15,7 @@ def init_api():
     app = Flask(__name__)
     CORS(app)
 
-    class ResultScheme(Schema):
-     id = fields.Int()
-     download = fields.Float()
-     upload = fields.Float()
-     ping = fields.Float()
-     timestamp = fields.DateTime()
-
-
-    result_schema = ResultScheme()
+    result_schema = ResultSchema()
 
 
     @app.route("/daily-average")
