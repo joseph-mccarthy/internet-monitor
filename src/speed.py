@@ -3,23 +3,43 @@ import subprocess
 from models.result import Result
 from dateutil.parser import parse
 import json
-from database import Base, db_session, engine
+from database import Base, db_session,engine
 from time import sleep
+import pprint
 
+def init_db():
 
-def speed_test(minutes):
-    while True:
-        print(datetime.now().isoformat() + "\t Testing Internet Speed")
-        response = subprocess.Popen('speedtest-cli --json', shell=True, stdout=subprocess.PIPE).stdout.read()
-        test_data = json.loads(response)
+    Base.metadata.create_all(bind=engine)
+    print_message("Initialised Database")
 
-        result:Result = Result()
-        result.download = test_data['download']
-        result.upload = test_data['upload']
-        result.ping = test_data['ping']
-        result.timestamp = parse(test_data['timestamp'])
+def run_speed_test():
 
-        db_session.add(result)
-        db_session.commit()
+    init_db()
     
-        sleep(minutes * 60)
+    json_data = speed_test_cli()
+    result = populate_model(json_data)
+    
+    db_session.add(result)
+    db_session.commit()
+    print_message("Speed Test Result Saved")
+
+def populate_model(json_data):
+    result:Result = Result()
+    result.download = json_data['download']
+    result.upload = json_data['upload']
+    result.ping = json_data['ping']
+    result.timestamp = parse(json_data['timestamp'])
+    return result
+
+def speed_test_cli():
+    print_message("Speed Test Started")
+    response = subprocess.Popen('speedtest-cli --json', shell=True, stdout=subprocess.PIPE).stdout.read()
+    json_data = json.loads(response)
+    print_message("Speed Test Complete")
+    return json_data
+
+def print_message(message:str):
+    print(datetime.now().strftime("%d/%m/%Y-%H:%M:%S") + "\t" + message)
+
+if __name__ == '__main__':
+    run_speed_test() 

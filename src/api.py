@@ -55,12 +55,8 @@ def init_api():
 def main(minutes):
 
     init_db()
-
-    speed_test_thread = threading.Thread(target=speed_test, args=(minutes,))
-    speed_test_thread.start()
-
     init_api()
 
 
 if __name__ == '__main__':
-    main(1) # TODO make this a command line argument else default to 30 minutes
+    main() 
