@@ -19,7 +19,6 @@ def init_api():
 
     result_schema = ResultSchema()
 
-
     @app.route("/daily-average")
     def daily_average():
         result = db_session.query(Result).all()
@@ -32,11 +31,13 @@ def init_api():
 
     @app.route("/graph")
     def graph():
-        delta = datetime.now() - timedelta(days = 1)
-        result =  db_session.query(Result).filter(func.DATE(Result.timestamp) >= delta).all()
+        delta = datetime.now() - timedelta(days=1)
+        result = db_session.query(Result).filter(
+            func.DATE(Result.timestamp) >= delta).all()
+
         return result_schema.dumps(result, many=True)
 
-    app.run(debug=True,host="0.0.0.0");
+    app.run(debug=True, host="0.0.0.0")
 
 
 def main():
@@ -44,5 +45,5 @@ def main():
     init_api()
 
 
-if __name__ == '__main__':
-    main() 
+if __name__ == "__main__":
+    main()
