@@ -1,16 +1,10 @@
-from datetime import datetime, timedelta, date
-import subprocess
-import json
-from time import sleep 
+from datetime import datetime, timedelta
 from database import Base, db_session, engine
 from sqlalchemy import func
 from models.result import Result
-from dateutil.parser import parse
 from flask import Flask
-import threading
 from marshmallow import Schema, fields
 from flask_cors import CORS, cross_origin
-from speed import speed_test
 
 def init_db():
 
@@ -52,7 +46,7 @@ def init_api():
 
 
 
-def main(minutes):
+def main():
 
     init_db()
     init_api()
