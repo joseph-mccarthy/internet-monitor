@@ -15,7 +15,7 @@ def init_api():
     app = Flask(__name__)
     CORS(app)
 
-    class ObjectSchema(Schema):
+    class ResultScheme(Schema):
      id = fields.Int()
      download = fields.Float()
      upload = fields.Float()
@@ -23,24 +23,24 @@ def init_api():
      timestamp = fields.DateTime()
 
 
-    object_schema = ObjectSchema()
+    result_schema = ResultScheme()
 
 
-    @app.route("/results")
-    def results():
+    @app.route("/daily-average")
+    def daily_average():
         result = db_session.query(Result).all()
-        return object_schema.dumps(result, many=True)
+        return result_schema.dumps(result, many=True)
 
-    @app.route("/latest")
-    def latest():
+    @app.route("/latest-result")
+    def latest_result():
         result = db_session.query(Result).order_by(Result.id.desc()).first()
-        return object_schema.dumps(result, many=False)
+        return result_schema.dumps(result, many=False)
 
-    @app.route("/today")
-    def last_day():
+    @app.route("/graph")
+    def graph():
         delta = datetime.now() - timedelta(days = 1)
         result =  db_session.query(Result).filter(func.DATE(Result.timestamp) >= delta).all()
-        return object_schema.dumps(result, many=True)
+        return result_schema.dumps(result, many=True)
 
     app.run(debug=True,host="0.0.0.0");
 
