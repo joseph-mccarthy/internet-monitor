@@ -1,16 +1,18 @@
 from datetime import datetime
 import subprocess
+from time import sleep
 from models.result import Result
 import json
 from database import Base, db_session, engine
+from schedule import every, repeat, run_pending
 
 
 def init_db():
 
     Base.metadata.create_all(bind=engine)
-    print_message("Initialised Database")
 
 
+@repeat(every(30).minutes)
 def run_speed_test():
 
     init_db()
@@ -20,7 +22,6 @@ def run_speed_test():
 
     db_session.add(result)
     db_session.commit()
-    print_message("Speed Test Result Saved")
 
 
 def populate_model(json_data):
@@ -37,7 +38,6 @@ def speed_test_cli():
     response = subprocess.Popen(
         'speedtest-cli --json', shell=True, stdout=subprocess.PIPE).stdout.read()
     json_data = json.loads(response)
-    print_message("Speed Test Complete")
     return json_data
 
 
@@ -47,3 +47,6 @@ def print_message(message: str):
 
 if __name__ == '__main__':
     run_speed_test()
+    while True:
+        run_pending()
+        sleep(1)
