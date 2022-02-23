@@ -24,9 +24,9 @@ def run_speed_test():
 
 def populate_model(json_data):
     result: Result = Result()
-    result.download = json_data['download']
-    result.upload = json_data['upload']
-    result.ping = json_data['ping']
+    result.download = json_data['download']['bandwidth']
+    result.upload = json_data['upload']['bandwidth']
+    result.ping = json_data['ping']['latency']
     result.timestamp = datetime.now()
     return result
 
@@ -34,7 +34,7 @@ def populate_model(json_data):
 def speed_test_cli():
     print_message("Speed Test Started")
     response = subprocess.Popen(
-        'speedtest-cli --json', shell=True, stdout=subprocess.PIPE).stdout.read()
+        'speedtest --f=json --accept-license --accept-gdpr -a', shell=True, stdout=subprocess.PIPE).stdout.read()
     json_data = json.loads(response)
     return json_data
 
