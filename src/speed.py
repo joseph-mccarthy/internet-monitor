@@ -8,13 +8,11 @@ from schedule import every, repeat, run_pending
 
 
 def init_db():
-
     Base.metadata.create_all(bind=engine)
 
 
 @repeat(every(30).minutes)
 def run_speed_test():
-
     init_db()
 
     json_data = speed_test_cli()

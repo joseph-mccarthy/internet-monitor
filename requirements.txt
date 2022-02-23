@@ -20,6 +20,7 @@ platformdirs==2.5.1
 pycodestyle==2.8.0
 python-dateutil==2.8.2
 requests==2.27.1
+schedule==1.1.0
 six==1.16.0
 SQLAlchemy==1.4.31
 toml==0.10.2

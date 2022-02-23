@@ -3,12 +3,11 @@ from database import Base, db_session, engine
 from sqlalchemy import func
 from models.result import Result
 from flask import Flask
-from flask_cors import CORS, cross_origin
+from flask_cors import CORS
 from models.resultSchema import ResultSchema
 
 
 def init_db():
-
     Base.metadata.create_all(bind=engine)
     print("Initialized the db")
 
