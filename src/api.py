@@ -1,14 +1,10 @@
 from datetime import datetime, timedelta
-from distutils.command.upload import upload
 import json
-from re import I
 from database import Base, db_session, engine
 from sqlalchemy import func
 from models.result import Result
-from flask import Flask
-from flask import Response
+from flask import Flask, Response
 from flask_cors import CORS
-from models.resultSchema import ResultSchema
 
 
 def init_db():
