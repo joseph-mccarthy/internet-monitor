@@ -6,6 +6,8 @@ from models.result import Result
 from flask import Flask, Response
 from flask_cors import CORS
 
+MIME_TYPE = "applicaion/json"
+
 
 def init_db():
     Base.metadata.create_all(bind=engine)
@@ -49,7 +51,7 @@ def init_api():
             }
         }
 
-        return Response(json.dumps(response),  mimetype='application/json')
+        return Response(json.dumps(response),  mimetype=MIME_TYPE)
 
     @app.route("/latest")
     def latest_result():
@@ -60,7 +62,7 @@ def init_api():
             "ping": result.ping,
             "time": result.timestamp.timestamp()
         }
-        return Response(json.dumps(response),  mimetype='application/json')
+        return Response(json.dumps(response),  mimetype=MIME_TYPE)
 
     @app.route("/graph")
     def graph():
@@ -79,7 +81,7 @@ def init_api():
                 "time": item.timestamp.timestamp()
             })
 
-        return Response(json.dumps(json_list),  mimetype='application/json')
+        return Response(json.dumps(json_list),  mimetype=MIME_TYPE)
 
     app.run(debug=True, host="0.0.0.0")
 
