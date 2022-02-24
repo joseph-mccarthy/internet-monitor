@@ -1,5 +1,12 @@
 FROM python:3.8-slim-buster
 
+
+
+RUN apt-get update
+RUN apt-get install -y --no-install-recommends
+RUN apt-get install -y build-essential
+
+
 WORKDIR /app
 COPY requirements.txt requirements.txt
 COPY docker_entrypoint.sh docker_entrypoint.sh
