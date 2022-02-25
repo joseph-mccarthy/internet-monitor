@@ -132,6 +132,15 @@ The API exposes three endpoints for the data saved in the database
 
 ---
 
+## Roadmap
+
+- [ ] Delete data after 30 days
+- [ ] Send Notifications
+- [ ] Filter by date
+
+[Back To The Top](#internet-monitor)
+---
+
 ## References
 
 - [Speed Test CLI](https://www.speedtest.net/apps/cli)
