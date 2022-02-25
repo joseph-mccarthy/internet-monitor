@@ -139,6 +139,7 @@ The API exposes three endpoints for the data saved in the database
 - [ ] Filter by date
 
 [Back To The Top](#internet-monitor)
+
 ---
 
 ## References
