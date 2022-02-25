@@ -39,12 +39,12 @@ There are two options to use this software. Can run with just python by checking
 To use this method you'll require at least Python 3.7 install on your machine
 
 ```sh
-foo@bar:~$ git clone git@github.com:joseph-mccarthy/internet-monitor.git
-foo@bar:~$ curl -s https://install.speedtest.net/app/cli/install.deb.sh | bash
-foo@bar:~$ apt-get install speedtest
-foo@bar:~$ cd internet-monitor
-foo@bar:~$ pip3 install -r requirements.txt
-foo@bar:~$ ./local-start.sh
+git clone git@github.com:joseph-mccarthy/internet-monitor.git
+curl -s https://install.speedtest.net/app/cli/install.deb.sh | bash
+apt-get install speedtest
+cd internet-monitor
+pip3 install -r requirements.txt
+./local-start.sh
 ```
 
 ### Docker
@@ -52,8 +52,8 @@ foo@bar:~$ ./local-start.sh
 There is also a provided Docker image that runs both the speed test and the api with an exposed port of **5000**
 
 ```sh
-foo@bar:~$ docker pull joemccarthy/internet-monitor:latest
-foo@bar:~$ docker run -d -p 5000:5000 joemccarthy/internet-monitor:latest
+docker pull joemccarthy/internet-monitor:latest
+docker run -d -p 5000:5000 joemccarthy/internet-monitor:latest
 ```
 
 ## API Reference
