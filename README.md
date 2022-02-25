@@ -135,6 +135,7 @@ The API exposes three endpoints for the data saved in the database
 ## References
 
 - [Speed Test CLI](https://www.speedtest.net/apps/cli)
+- [Docker Hub Registry for Application](https://hub.docker.com/r/joemccarthy/internet-monitor)
 
 [Back To The Top](#internet-monitor)
 
