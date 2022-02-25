@@ -71,7 +71,7 @@ The API exposes three endpoints for the data saved in the database
 }
 ```
 
-### /last-day
+#### /last-day
 
 ```json
 {
