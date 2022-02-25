@@ -4,13 +4,7 @@
 
 ![Project Image](banner.png)
 
-> This is a ReadMe template to help save you time and effort.
-
----
-
 ## Table of Contents
-
-You're sections headers will be used to reference location of destination.
 
 - [Description](#description)
 - [How To Use](#how-to-use)
@@ -22,7 +16,7 @@ You're sections headers will be used to reference location of destination.
 
 ## Description
 
-Creating ReadMe's for your Github repository can be tedious.  I hope this template can save you time and effort as well as provide you with some consistency across your projects.
+Created this small and simple application to keep my Internet Service Provider honest. It's writtent in Python made up of two components. The first component is the speed test which is run every 30 minutes, and uses the [speedtest.net cli](https://www.speedtest.net/apps/cli) and stores the result in local sqlite database. The second component is a simple API that allows a client of choice to pull the data for the latest result, average of the last 24 hours and finally one for graphing.
 
 ## Technologies
 
@@ -30,7 +24,7 @@ Creating ReadMe's for your Github repository can be tedious.  I hope this templa
 - Flask
 - SqlAlchemy
 - Docker
-- [speedtest.net CLI](https://www.speedtest.net/apps/cli)
+- [Speedtest.net CLI](https://www.speedtest.net/apps/cli)
 
 [Back To The Top](#internet-monitor)
 
@@ -38,12 +32,100 @@ Creating ReadMe's for your Github repository can be tedious.  I hope this templa
 
 ## How To Use
 
-### Installation
+There are two options to use this software. Can run with just python by checking out the repository or use the docker image.
 
-### API Reference
+### Python
 
-```html
-    <p>dummy code</p>
+To use this method you'll require at least Python 3.7 install on your machine
+
+```sh
+foo@bar:~$ git clone git@github.com:joseph-mccarthy/internet-monitor.git
+foo@bar:~$ curl -s https://install.speedtest.net/app/cli/install.deb.sh | bash
+foo@bar:~$ apt-get install speedtest
+foo@bar:~$ cd internet-monitor
+foo@bar:~$ pip3 install -r requirements.txt
+foo@bar:~$ ./local-start.sh
+```
+
+### Docker
+
+There is also a provided Docker image that runs both the speed test and the api with an exposed port of **5000**
+
+```sh
+foo@bar:~$ docker pull joemccarthy/internet-monitor:latest
+foo@bar:~$ docker run -d -p 5000:5000 joemccarthy/internet-monitor:latest
+```
+
+## API Reference
+
+The API exposes three endpoints for the data saved in the database
+
+### /latest
+
+```json
+{
+    "download": 3296755.0,
+    "upload": 2175216.0,
+    "ping": 62.496,
+    "time": 1645789388.759391
+}
+```
+
+### /last-day
+
+```json
+{
+    "download": {
+        "high": 3852744.0,
+        "average": 3629769.4166666665,
+        "low": 3296755.0
+    },
+    "upload": {
+        "high": 2331189.0,
+        "average": 1883408.0416666667,
+        "low": 1215527.0
+    },
+    "ping": {
+        "high": 62.496,
+        "average": 16.989,
+        "low": 12.594
+    }
+}
+```
+
+### /graph
+
+```json
+[
+    {
+        "id": 1,
+        "download": 3364494.0,
+        "upload": 1085589.0,
+        "ping": 15.426,
+        "time": 1645710501.983828
+    },
+    {
+        "id": 2,
+        "download": 3330109.0,
+        "upload": 822428.0,
+        "ping": 17.148,
+        "time": 1645712303.276396
+    },
+    {
+        "id": 3,
+        "download": 3316571.0,
+        "upload": 1076903.0,
+        "ping": 15.835,
+        "time": 1645714140.544144
+    },
+    {
+        "id": 4,
+        "download": 3261149.0,
+        "upload": 1134400.0,
+        "ping": 15.76,
+        "time": 1645715986.757451
+    }
+]
 ```
 
 [Back To The Top](#internet-monitor)
