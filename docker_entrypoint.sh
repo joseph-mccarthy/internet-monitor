@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python3 src/speed.py & python3 src/api.py
+python3 /app/src/speed.py & python3 /app/src/api.py
