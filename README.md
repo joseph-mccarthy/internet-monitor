@@ -16,7 +16,7 @@
 
 ## Description
 
-Created this small and simple application to keep my Internet Service Provider honest. It's writtent in Python made up of two components. The first component is the speed test which is run every 30 minutes, and uses the [speedtest.net cli](https://www.speedtest.net/apps/cli) and stores the result in local sqlite database. The second component is a simple API that allows a client of choice to pull the data for the latest result, average of the last 24 hours and finally one for graphing.
+Created this small and simple application to keep my Internet Service Provider honest. It's written in Python made up of two components. The first component is the speed test which is run every 30 minutes, and uses the [speedtest.net cli](https://www.speedtest.net/apps/cli) and stores the result in local sqlite database. The second component is a simple API that allows a client of choice to pull the data for the latest result, average of the last 24 hours and finally one for graphing.
 
 ## Technologies
 
