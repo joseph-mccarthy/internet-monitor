@@ -56,11 +56,11 @@ docker pull joemccarthy/internet-monitor:latest
 docker run -d -p 5000:5000 joemccarthy/internet-monitor:latest
 ```
 
-## API Reference
+### API Reference
 
 The API exposes three endpoints for the data saved in the database
 
-### /latest
+#### /latest
 
 ```json
 {
@@ -93,7 +93,7 @@ The API exposes three endpoints for the data saved in the database
 }
 ```
 
-### /graph
+#### /graph
 
 ```json
 [
