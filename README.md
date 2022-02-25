@@ -135,8 +135,8 @@ The API exposes three endpoints for the data saved in the database
 ## Roadmap
 
 - [ ] [#1](../../issues/1) Delete data after 30 days
-- [ ] [#2](../../issues/2) Send Notifications
-- [ ] [#3](../../issues/3) Filter by date
+- [ ] [#2](../../issues/2) Filter by date
+- [ ] [#3](../../issues/3) Send Notifications
 
 [Back To The Top](#internet-monitor)
 
